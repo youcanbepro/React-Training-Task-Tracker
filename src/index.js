@@ -3,11 +3,16 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import {TaskStore} from "./components/utils/TaskStore"
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+     <TaskStore.Provider>
+        <App />
+     </TaskStore.Provider>
+  
+
   </React.StrictMode>
 );
 
