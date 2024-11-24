@@ -1,3 +1,4 @@
+import { TaskForm } from "./components/taskForm/TaskForm";
 import { TaskList } from "./components/taskList/TaskList";
 
 /**
@@ -9,7 +10,11 @@ function App() {
 
 
   return (
-    <TaskList />
+
+    <>
+        <TaskList />
+        <TaskForm/>
+    </>
   );
 }
 

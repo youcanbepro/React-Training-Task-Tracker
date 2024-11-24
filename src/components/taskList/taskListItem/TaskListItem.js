@@ -5,6 +5,8 @@ import { useLongPress } from '../../utils/useLongPress';
 import { MuiDialog } from '../../utils/components/MuiDialog';
 import { msgAction } from '../../BackendDeclarations';
 import Alert from '@mui/material/Alert';
+import Fab from '@mui/material/Fab';
+import EditIcon from '@mui/icons-material/Edit';
 
 export const TaskListItem = (task) => {
    const {handleTaskClick,sendMsg,msg} = TaskStore.useStore()
@@ -24,7 +26,7 @@ export const TaskListItem = (task) => {
   return (
     < >
         <Grid   key={task.task.id} container justifyContent={"space-between"}>
-                <Grid style={{pointerEvents: task.task.completed===true?"none":"all"}} item {...useLongPress(() =>  
+                <Grid style={{pointerEvents: task.task.completed===true?"none":"all",opacity:task.task.completed===true?.6:1}} item {...useLongPress(() =>  
                    sendMsg({id:task.task.id,msgAc:msgAction.edit}), { ms: 1500 })}>
                   <Typography
                     style={{ textDecoration: task.task.completed ? 'line-through' : 'none', }}
@@ -44,6 +46,9 @@ export const TaskListItem = (task) => {
 
                   } }>Delete</Button>
                 </Grid>
+                   {msg.msgAc==msgAction.edit&&<Fab color="secondary" aria-label="edit">
+        <EditIcon onClick={()=> sendMsg({id:task.task.id,msgAc:msgAction.none})} />
+      </Fab>}
               </Grid>
               <Box my={2}>
                 <Divider />
@@ -61,6 +66,8 @@ export const TaskListItem = (task) => {
         </Alert>
             </Snackbar>
               }
+
+            
     </>
 
   )
