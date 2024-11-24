@@ -11,7 +11,7 @@ function createStore() {
   function Provider({ children }) {
   
     const [tasks, setTasks] = useState([])
-      const [completedTasks, setcompletedTasks] = useState([ { id: "r4", text: 'Deep  macho Dive',summary:"Performance enhancing",  completed: true } ])
+      const [completedTasks, setcompletedTasks] = useState([])
     const [msg, setMsg]=useState({id:"",msg:msgAction.cancel})
     const [popUp, setPopUp]=useState({id:"",popUp:popUpType.none})
 
@@ -22,13 +22,8 @@ localStorage.setItem("tasks",JSON.stringify(updatedTasks))
   const tasksLocal = localStorage.getItem("tasks")
     if (tasksLocal)
     setTasks(JSON.parse(tasksLocal))
-else 
-setTasks([
-    { id: "r1", text: 'React Fundamentals',summary:"Get fimiliar with the basics ", completed: false },
-    { id: "r2", text: 'Hooks',summary:"All the hooks ",  completed: false },
-    { id: "r3", text: 'Deep Dive',summary:"Performance enhancing",  completed: false }
-  ])
-  // localStorage.clear()
+
+   //localStorage.clear()
     },[])
      useEffect(() => {
  switch (popUpType) {

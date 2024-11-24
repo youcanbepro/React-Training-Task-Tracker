@@ -3,6 +3,8 @@ import { TaskList } from "./components/taskList/TaskList";
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import { TaskStore } from './components/utils/TaskStore';
+import { MuiNavBar } from "./components/utils/components/MuiNavBar";
+import { Divider, Stack } from "@mui/material";
 /**
  * Simple task tracker app.
  * (For training purposes)
@@ -12,14 +14,17 @@ function App() {
     const {tasks,tasksHistory} = TaskStore.useStore()
 
   return (
-
     <>
-     <Fab color="primary" aria-label="add">
-        <AddIcon />
-      </Fab>
-        <TaskList title={"Task Tracker"} tasks={tasks} />
-          <TaskList  title={"Task History"} tasks={tasksHistory} />
+<MuiNavBar/>
+<Stack  direction={'row'} divider={<Divider orientation="vertical" flexItem/>}>
+        <TaskList title="Backlog" tasks={tasks} />
+        <TaskList title="In Progress" tasks={tasksHistory} />
+        <TaskList  title="Completed" tasks={tasksHistory} />
+</Stack>
+  
+
     </>
+
   );
 }
 

@@ -42,9 +42,11 @@ export const TaskListItem = (task) => {
                 </Grid>
                 <Grid item>
                   
-                    {msg.msgAc==msgAction.edit?<Fab size='small' color="secondary" aria-label="edit">
+                    {msg.msgAc==msgAction.edit?<Fab size='small' color="primary" aria-label="edit">
         <EditIcon onClick={()=> sendMsg({id:task.task.id,msgAc:msgAction.none})} />
-      </Fab>:<Button variant='contained' onClick={() => {
+      </Fab>:
+      
+      <Button variant='contained' color='primary' onClick={() => {
                     setVisible(true)
                     sendMsg({id:task.task.id,msgAc:msgAction.delete})
 
