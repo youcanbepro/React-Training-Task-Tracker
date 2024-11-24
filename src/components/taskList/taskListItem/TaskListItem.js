@@ -38,17 +38,19 @@ export const TaskListItem = (task) => {
                   >
                     {task.task.text}
                   </Typography>
+                 
                 </Grid>
                 <Grid item>
-                  <Button variant='contained' onClick={() => {
+                  
+                    {msg.msgAc==msgAction.edit?<Fab size='small' color="secondary" aria-label="edit">
+        <EditIcon onClick={()=> sendMsg({id:task.task.id,msgAc:msgAction.none})} />
+      </Fab>:<Button variant='contained' onClick={() => {
                     setVisible(true)
                     sendMsg({id:task.task.id,msgAc:msgAction.delete})
 
-                  } }>Delete</Button>
+                  } }>Delete</Button>}
                 </Grid>
-                   {msg.msgAc==msgAction.edit&&<Fab color="secondary" aria-label="edit">
-        <EditIcon onClick={()=> sendMsg({id:task.task.id,msgAc:msgAction.none})} />
-      </Fab>}
+                  
               </Grid>
               <Box my={2}>
                 <Divider />

@@ -11,6 +11,7 @@ function createStore() {
   function Provider({ children }) {
   
     const [tasks, setTasks] = useState([])
+      const [completedTasks, setcompletedTasks] = useState([ { id: "r4", text: 'Deep  macho Dive',summary:"Performance enhancing",  completed: true } ])
     const [msg, setMsg]=useState({id:"",msg:msgAction.cancel})
     const [popUp, setPopUp]=useState({id:"",popUp:popUpType.none})
 
@@ -50,6 +51,13 @@ setTasks([
     setTasks(updatedTasks);
        saveTasks(updatedTasks)
   };
+
+   const handleTaskMove = (taskId) => {
+    // Filter all tasks excpet task with passed id
+    const updatedTasks = tasks.filter(task => task.id !== taskId);
+    setcompletedTasks([...updatedTasks, completedTasks]);
+   // saveTasks(updatedTasks)
+  };
     /**
    * Handels the click on a task and toggles the complete property of the task object.
    *
@@ -80,7 +88,8 @@ setTasks([
       sendMsg:setMsg,
       msg,
       popUp,
-      setPopUp
+      setPopUp,
+      tasksHistory:completedTasks
     }
 
     return <Context.Provider value={contextObject}>{children}</Context.Provider>

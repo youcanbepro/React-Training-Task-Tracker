@@ -10,19 +10,7 @@ import NavigationIcon from '@mui/icons-material/Navigation';
 export const TaskForm = () => {
   return (
     <>
-      <Fab color="primary" aria-label="add">
-        <AddIcon />
-      </Fab>
-      <Fab color="secondary" aria-label="edit">
-        <EditIcon />
-      </Fab>
-      <Fab variant="extended">
-        <NavigationIcon sx={{ mr: 1 }} />
-        Navigate
-      </Fab>
-      <Fab disabled aria-label="like">
-        <FavoriteIcon />
-      </Fab>
+      
     </>
   )
 }
