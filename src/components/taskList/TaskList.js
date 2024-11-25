@@ -1,7 +1,5 @@
 import React from 'react'
-import { Paper, Box, Typography, Chip,  } from '@mui/material';
-
-import { TaskListItem } from './taskListItem/TaskListItem';
+import { Paper, Box, Typography, Chip, Badge,  } from '@mui/material';
 import { TaskCard } from './taskListItem/TaskCard';
 
 
@@ -13,18 +11,20 @@ const getTitleColor =()=>{
     else  if(title.toString()==="In Progress")
       return "primary"
 }
-
   return (
-    <Box mx={5} my={5}>
+    <Box sx={{flexGrow:".33"}} elevation={2} >
+    <Box mx={5} my={5} >
         <Box mx={5}>
           <Box pt={3} pb={5} sx={{display:"flex", justifyContent:"center" } }>
-            <Chip color={getTitleColor()} label={title}  />
+            <Chip color={getTitleColor()} label={title} />
+              <Badge badgeContent={tasks.length} showZero color='primary'>
+              </Badge> 
           </Box>
           {tasks.map(task => (
-             <TaskCard task={task}/>
+             <TaskCard id={task.id} title={title} task={task}/>
           ))}
-           
         </Box>
+    </Box>
     </Box>
   )
 }

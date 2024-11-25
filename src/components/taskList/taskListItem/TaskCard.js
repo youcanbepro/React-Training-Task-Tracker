@@ -10,7 +10,7 @@ import DoneIcon from '@mui/icons-material/Done';
 import DeleteIcon from '@mui/icons-material/Delete';
 import SendIcon from '@mui/icons-material/Send';
 
-export const TaskCard = ({task}) => {
+export const TaskCard = ({id,task, title}) => {
       const {handleTaskClick,sendMsg,msg} = TaskStore.useStore()
   const [visible, setVisible]= useState(false)
    const [snackVisibility, setSnackVisibility]= useState(false)
@@ -28,18 +28,18 @@ export const TaskCard = ({task}) => {
 
 
   return (
-    <Box width={"300px"} padding={"10px"}>
+    <Box id={id} width={"300px"} padding={"10px"}>
 
     <Card>
     <CardContent>
-        <Paper  elevation={1} sx={{display:"flex",justifyContent:"center" , alignItems:"center", bgcolor:"#33bfff", height:80}}>
+        <Paper  elevation={1} sx={{display:"flex",justifyContent:"center" , alignItems:"center", height:80}}>
         <Typography  style={{ textDecoration: task.completed ? 'line-through' : 'none', }} gutterBottom variant='h6' component={'div'}>{task.text}</Typography>
         </Paper>
     <Typography  sx={{display:"flex",justifyContent:"center" , alignItems:"center", height:50}}  variant='body2' color={'text.secondary'}>{task.summary}</Typography>
     </CardContent>
     <CardActions sx={{display:"flex"}}>
 <Box sx={{display:"flex",flexDirection:"row-reverse",gap:"10px", justifyContent:"end" }}>
-  <Tooltip   title="Move to WIP" arrow  placement='top' >
+  {title==="Backlog"&&<Tooltip   title="Move to WIP" arrow  placement='top' >
        <Fab size='small' color="primary" aria-label="move"  onClick={() => {
                     setVisible(true)
                     sendMsg({id:task.id,msgAc:msgAction.delete})
@@ -47,8 +47,8 @@ export const TaskCard = ({task}) => {
                   } }>
             <SendIcon />
           </Fab>
-    </Tooltip>
-    <Tooltip   title="Delete Task" arrow  placement='top' >
+    </Tooltip>}
+    {<Tooltip   title="Delete Task" arrow  placement='top' >
        <Fab size='small' color="primary" aria-label="delete"  onClick={() => {
                     setVisible(true)
                     sendMsg({id:task.id,msgAc:msgAction.delete})
@@ -56,9 +56,9 @@ export const TaskCard = ({task}) => {
                   } }>
             <DeleteIcon />
           </Fab>
-    </Tooltip>
+    </Tooltip>}
 
-   {!task.completed&&<Tooltip title="Complete" arrow  placement='top' >
+   {title==="In Progress"&&<Tooltip title="Complete" arrow  placement='top' >
        <Fab size='small' color="primary" aria-label="complete"  onClick={() => {
                     setVisible(true)
                     sendMsg({id:task.id,msgAc:msgAction.delete})

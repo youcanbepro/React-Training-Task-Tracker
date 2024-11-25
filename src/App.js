@@ -5,21 +5,23 @@ import AddIcon from '@mui/icons-material/Add';
 import { TaskStore } from './components/utils/TaskStore';
 import { MuiNavBar } from "./components/utils/components/MuiNavBar";
 import { Divider, Stack } from "@mui/material";
+import { msgAction } from "./components/BackendDeclarations";
 /**
  * Simple task tracker app.
  * (For training purposes)
  */
 
 function App() {
-    const {tasks,tasksHistory} = TaskStore.useStore()
+    const {tasks,msg,tasksHistory,wipTasks} = TaskStore.useStore()
 
   return (
     <>
 <MuiNavBar/>
-<Stack  direction={'row'} divider={<Divider orientation="vertical" flexItem/>}>
+<Stack   spacing={1} direction={'row'} >
         <TaskList title="Backlog" tasks={tasks} />
-        <TaskList title="In Progress" tasks={tasksHistory} />
+        <TaskList title="In Progress" tasks={wipTasks} />
         <TaskList  title="Completed" tasks={tasksHistory} />
+        { msg.msgAc===msgAction.create&&<TaskForm></TaskForm>}
 </Stack>
   
 

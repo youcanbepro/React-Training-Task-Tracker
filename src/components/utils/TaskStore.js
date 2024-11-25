@@ -1,6 +1,6 @@
 
 import React, { useContext, useEffect, useState } from "react"
-import { msgAction, popUpType } from "../BackendDeclarations"
+import { msgAction } from "../BackendDeclarations"
 
 
  
@@ -9,32 +9,29 @@ function createStore() {
   const Context = React.createContext()
 
   function Provider({ children }) {
-  
-    const [tasks, setTasks] = useState([])
-      const [completedTasks, setcompletedTasks] = useState([])
+    const [tasks, setTasks] = useState([
+  ])
+    const [completedTasks, setcompletedTasks] = useState([])
+    const [wipTasks, setWipTasks] = useState([])
     const [msg, setMsg]=useState({id:"",msg:msgAction.cancel})
-    const [popUp, setPopUp]=useState({id:"",popUp:popUpType.none})
 
-      const saveTasks= (updatedTasks)=>{
-localStorage.setItem("tasks",JSON.stringify(updatedTasks))
+    /**
+   * Handles the click on the delete button and removes it from the tasks list.
+   *
+   * @param {Array} updatedTasks
+   */
+      const saveTasks = (updatedTasks)=>{
+      localStorage.setItem("tasks",JSON.stringify(updatedTasks))
    }
+
    useEffect(() => {
   const tasksLocal = localStorage.getItem("tasks")
     if (tasksLocal)
     setTasks(JSON.parse(tasksLocal))
 
-   //localStorage.clear()
+  
     },[])
-     useEffect(() => {
- switch (popUpType) {
-    case popUpType.delete:
-        
-        break;
- 
-    default:
-        break;
- }
-    },[popUp])
+      
  /**
    * Handles the click on the delete button and removes it from the tasks list.
    *
@@ -71,20 +68,28 @@ localStorage.setItem("tasks",JSON.stringify(updatedTasks))
     saveTasks(updatedTasks)
   };
 
-
+    /**
+   * Creates a new task
+   *
+   * @param {text,summary} task
+   */
+  const handleCreateTask= ({text,summary}) => {
+    // generate a unique id
+   setTasks([...tasks,{id:"r"+(+tasks.length+1),...{text,summary},completed:false} ])
+  };
 
     const contextObject = {
       tasks,
-
       setTasks,
       handleTaskDelete,
       saveTasks,
       handleTaskClick,
       sendMsg:setMsg,
       msg,
-      popUp,
-      setPopUp,
-      tasksHistory:completedTasks
+      tasksHistory:completedTasks,
+      wipTasks,
+      setWipTasks,
+      handleCreateTask
     }
 
     return <Context.Provider value={contextObject}>{children}</Context.Provider>
