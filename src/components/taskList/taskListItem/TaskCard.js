@@ -2,7 +2,6 @@ import { Box, Card, CardContent, Typography, Button, Grid, Divider, Snackbar, Ca
 import React, { useState } from 'react'
 import { TaskStore } from '../../utils/TaskStore';
 import { useLongPress } from '../../utils/useLongPress';
-import { MuiDialog } from '../../utils/components/MuiDialog';
 import { msgAction } from '../../BackendDeclarations';
 import Alert from '@mui/material/Alert';
 import Fab from '@mui/material/Fab';
@@ -12,7 +11,6 @@ import SendIcon from '@mui/icons-material/Send';
 
 export const TaskCard = ({task, title}) => {
       const {handleTaskClick,sendMsg,msg} = TaskStore.useStore()
-  const [visible, setVisible]= useState(false)
    const [snackVisibility, setSnackVisibility]= useState(false)
 
   const handleClose = (
@@ -66,7 +64,6 @@ export const TaskCard = ({task, title}) => {
 </Card>
 
 {<Snackbar autoHideDuration={2000} open={snackVisibility} onClose={handleClose}>
-              
               <Alert
           onClose={handleClose}
           severity="success"

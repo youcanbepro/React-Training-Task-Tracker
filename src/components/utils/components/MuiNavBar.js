@@ -15,7 +15,7 @@ const StyledFab = styled(Fab)({
   margin: '0 auto',
 });
 export const MuiNavBar = () => {
-    const {createTask,sendMsg} = TaskStore.useStore()
+    const {createTask,sendMsg,tasks} = TaskStore.useStore()
   return (
     <AppBar position='fixed' sx={{ top: 'auto', bottom: 0 }} color='primary'>
         <Toolbar>
@@ -28,7 +28,7 @@ export const MuiNavBar = () => {
                 </Typography>
                 <Stack direction={'row'} spacing={2}>
        
-                <Tooltip title="Create Task" arrow  placement='top' >
+                <Tooltip title="Create Task" arrow  placement='top'open={tasks.length==0}>
        <StyledFab color="primary" aria-label="add" onClick={()=>sendMsg({msgAc:msgAction.create}) }>
             <AddIcon />
           </StyledFab>
