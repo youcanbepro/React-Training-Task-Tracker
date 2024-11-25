@@ -8,6 +8,7 @@ import Fab from '@mui/material/Fab';
 import DoneIcon from '@mui/icons-material/Done';
 import DeleteIcon from '@mui/icons-material/Delete';
 import SendIcon from '@mui/icons-material/Send';
+import "./taskCard.css"
 
 export const TaskCard = ({task, title}) => {
       const {handleTaskClick,sendMsg,msg} = TaskStore.useStore()
@@ -26,8 +27,17 @@ export const TaskCard = ({task, title}) => {
 
 
   return (
-    <Box key={task.id} width={"300px"} padding={"10px"} {...useLongPress(() =>  
+    <Box sx={{position:"relative"}}>
+    { task.id===msg.id&&msg.msgAc===msgAction.toDelete&&<Tooltip   title="Delete Task" arrow  placement='top' >
+       <Fab sx={{position:"absolute"}} size='small' color="primary" aria-label="delete"  onClick={() => {
+                    sendMsg({id:task.id,msgAc:msgAction.delete})
+                  } }>
+            <DeleteIcon />
+          </Fab>
+    </Tooltip>}
+     <Box className={task.id===msg.id&&msg.msgAc===msgAction.toDelete&&"jiggle"} key={task.id} width={"300px"} padding={"10px"} {...useLongPress(() =>  
                    sendMsg({id:task.id,msgAc:msgAction.toDelete}), { ms: 1500 })}>
+                    
 
     <Card>
     <CardContent>
@@ -44,13 +54,7 @@ export const TaskCard = ({task, title}) => {
             <SendIcon />
           </Fab>
     </Tooltip>}
-    { msg.msgAc===msgAction.toDelete&&<Tooltip   title="Delete Task" arrow  placement='top' >
-       <Fab size='small' color="primary" aria-label="delete"  onClick={() => {
-                    sendMsg({id:task.id,msgAc:msgAction.delete})
-                  } }>
-            <DeleteIcon />
-          </Fab>
-    </Tooltip>}
+   
 
    {title==="In Progress"&&<Tooltip title="Complete" arrow  placement='top' >
        <Fab size='small' color="primary" aria-label="complete"  onClick={() => {
@@ -76,5 +80,8 @@ export const TaskCard = ({task, title}) => {
               }
 
     </Box>
+    </Box>
+     
+   
   )
 }
