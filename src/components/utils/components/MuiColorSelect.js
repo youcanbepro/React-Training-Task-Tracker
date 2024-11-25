@@ -11,8 +11,8 @@ const colors = [
   { name: "White", hex: "#ffffff" },
 ];
 
-const MuiColorSelect  = () => {
-  const [selectedColor, setSelectedColor] = useState("#ffffff");
+const MuiColorSelect  = ({selectedColor, setSelectedColor}) => {
+ 
 
   const handleChange = (event) => {
     setSelectedColor(event.target.value );

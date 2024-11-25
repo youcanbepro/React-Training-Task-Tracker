@@ -13,9 +13,9 @@ const getTitleColor =()=>{
 }
   return (
     <Box sx={{flexGrow:".33"}} elevation={2} >
-    <Box mx={5} my={5} >
-        <Box mx={5}>
-          <Box pt={3} pb={5} sx={{display:"flex", justifyContent:"center" } }>
+    <Box mx={4} my={4} >
+        <Box mx={4}>
+          <Box pt={2} pb={4} sx={{display:"flex", justifyContent:"center" } }>
             <Chip color={getTitleColor()} label={title} />
               <Badge badgeContent={tasks.length} showZero color='primary'>
               </Badge> 

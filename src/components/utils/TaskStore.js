@@ -1,5 +1,5 @@
 
-import React, { useContext, useEffect, useRef, useState } from "react"
+import React, { useContext, useEffect,  useState } from "react"
 import { msgAction } from "../BackendDeclarations"
 
 function createStore() {
@@ -39,8 +39,20 @@ function createStore() {
 
    const handleTaskMove = (taskId) => {
     // Filter all tasks excpet task with passed id
+    const taskFound = tasks.find(task => task.id === taskId);
     const updatedTasks = tasks.filter(task => task.id !== taskId);
-    setcompletedTasks([...updatedTasks, completedTasks]);
+    setTasks(updatedTasks)
+    setWipTasks([...wipTasks, taskFound]);
+
+   // saveTasks(updatedTasks)
+  };
+   const handleTaskMoveBack = (taskId) => {
+    // Filter all tasks excpet task with passed id
+    const taskFound = wipTasks.find(task => task.id === taskId);
+    const updatedTasks = wipTasks.filter(task => task.id !== taskId);
+    setWipTasks(updatedTasks)
+    setTasks([...tasks, taskFound]);
+
    // saveTasks(updatedTasks)
   };
     /**
@@ -50,14 +62,14 @@ function createStore() {
    */
   const handleTaskClick = (taskId) => {
     // Iterate all tasks and find passed task by id
-    const updatedTasks = tasks.map(task => {
-      if (task.id === taskId) {
-        // Toggle completed property
-        return { ...task, completed: true };
-      }
-      return task;
-    });
-    setTasks(updatedTasks);
+    const updatedTask = wipTasks.find(task => {
+      if(task.id === taskId)
+       return  task
+    }
+    );
+     const updatedTasks = wipTasks.filter(task => task.id !== taskId);
+    setWipTasks(updatedTasks) 
+    setcompletedTasks([...completedTasks,{...updatedTask,completed:true}]);
    // saveTasks(updatedTasks)
   };
 
@@ -66,9 +78,10 @@ function createStore() {
    *
    * @param {text,summary} task
    */
-  const handleCreateTask= ({text,summary}) => {
+  const handleCreateTask= ({text,summary,prio,color}) => {
+
     // generate a unique id
-   setTasks([...tasks,{id:"r"+(+tasks.length+1),...{text,summary},completed:false} ])
+   setTasks([...tasks,{id:"r"+Math.random()+(+tasks.length+1),...{text,summary,prio,color},completed:false} ])
   };
 
     const contextObject = {
@@ -83,7 +96,9 @@ function createStore() {
       tasksHistory:completedTasks,
       wipTasks,
       setWipTasks,
-      handleCreateTask
+      handleCreateTask,
+      handleTaskMove,
+      handleTaskMoveBack
     }
 
     return <Context.Provider value={contextObject}>{children}</Context.Provider>

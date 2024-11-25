@@ -1,4 +1,4 @@
-import { Box, Card, CardContent, Typography, Button, Grid, Divider, Snackbar, CardActions, Tooltip, Paper, TextField, Chip  } from '@mui/material'
+import { Box, Card, CardContent, Typography,Snackbar, CardActions, Tooltip, Paper, Chip  } from '@mui/material'
 import React, { useState } from 'react'
 import { TaskStore } from '../../utils/TaskStore';
 import { useLongPress } from '../../utils/useLongPress';
@@ -11,7 +11,7 @@ import PanToolAltSharpIcon from '@mui/icons-material/PanToolAltSharp';
 import "./taskCard.css"
 
 export const TaskCard = ({task, title}) => {
-      const {handleTaskClick,sendMsg,msg} = TaskStore.useStore()
+      const {handleTaskClick,sendMsg,msg,handleTaskMove,handleTaskMoveBack} = TaskStore.useStore()
    const [snackVisibility, setSnackVisibility]= useState(false)
 
   const handleClose = (
@@ -24,7 +24,32 @@ export const TaskCard = ({task, title}) => {
    setSnackVisibility(false)
   };
 
+const getChipLabel=()=>{
+  if (task.prio===0)
+return "None"
+   if (task.prio===1)
+return "Low"
+    if (task.prio===2)
+return "Medium"
+     if (task.prio===3)
+return "High"
+}
 
+const getChipColor=()=>{
+   if (task.prio===0)
+return "secondary"
+   if (task.prio===1)
+return "success"
+    if (task.prio===2)
+return "warning"
+     if (task.prio===3)
+return "error"
+     
+}
+
+const getBgColor = ()=>{
+  return task.color
+}
 
   return (
     <Box sx={{position:"relative"}}>
@@ -40,35 +65,35 @@ export const TaskCard = ({task, title}) => {
                     
 
     <Card>
-    <CardContent>
-        <Paper  elevation={1} sx={{display:"flex",justifyContent:"center" , alignItems:"center", height:80}}>
-        <Typography  style={{ textDecoration: task.completed ? 'line-through' : 'none', }} gutterBottom variant='h6' component={'div'}>{task.text}</Typography>
+    <CardContent >
+        <Paper   elevation={1} sx={{display:"flex",justifyContent:"center" , alignItems:"center",bgcolor:getBgColor() , height:80}}>
+        <Typography  style={{ textDecoration: task.completed ? 'line-through' : 'none' }} gutterBottom variant='h6' component={'div'}>{task.text}</Typography>
         </Paper>
     <Typography  sx={{display:"flex",justifyContent:"center" , alignItems:"center", height:50}}  variant='body2' color={'text.secondary'}>{task.summary}</Typography>
     </CardContent>
-    <CardActions sx={{display:"flex"}}>
-<Box sx={{display:"flex",flexDirection:"row",gap:"10px",  }}>
+    <CardActions sx={{display:"flex", justifyContent:"end"}}>
+<Box sx={{display:"flex",flexDirection:"row",gap:"50px",  }}>
   {title==="Backlog"&&<Tooltip   title="Move to WIP" arrow  placement='top' >
-       <Fab size='small' color="primary" aria-label="move"  onClick={() => {
+       <Fab size='small' color="primary" aria-label="move"  onClick={() => {handleTaskMove(task.id)
                   } }>
             <PanToolAltSharpIcon  sx={{transform:"rotate(90deg)"}}/>
           </Fab>
     </Tooltip>}
    {title==="In Progress"&&<Tooltip   title="Move to Backlog" arrow  placement='top' >
-       <Fab size='small' color="primary" aria-label="move"  onClick={() => {
+       <Fab size='small' color="primary" aria-label="move"  onClick={() => {handleTaskMoveBack(task.id)
                   } }>
             <PanToolAltSharpIcon  sx={{transform:"rotate(-90deg) scaleX(-1)"}}/>
           </Fab>
     </Tooltip>}
 
    {title==="In Progress"&&<Tooltip title="Complete" arrow  placement='top' >
-       <Fab size='small' color="primary" aria-label="complete"  onClick={() => {
-                  
+       <Fab size='small' color="primary" aria-label="complete"  onClick={() => {handleTaskClick(task.id)
+                  setSnackVisibility(true)
                   } }>
             <DoneIcon />
           </Fab>
     </Tooltip>}
-       <Chip  color={"warning"} label={"High"} />
+       <Chip  color={getChipColor()} label={getChipLabel()} />
 </Box>
 </CardActions>
 

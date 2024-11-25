@@ -4,8 +4,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
-export default function PrioSelect() {
-  const [priority, setPriority] = React.useState(0);
+export default function PrioSelect({priority,setPriority}) {
 
   const handleChange = (event) => {
     setPriority(event.target.value);
@@ -26,9 +25,11 @@ export default function PrioSelect() {
           <MenuItem value={0}>
             <em>None</em>
           </MenuItem>
-          <MenuItem value={20}>High</MenuItem>
-          <MenuItem value={21}>Medium</MenuItem>
-          <MenuItem value={22}>Low</MenuItem>
+          <MenuItem value={1}>Low</MenuItem>
+           <MenuItem value={2}>Medium</MenuItem>
+          <MenuItem value={3}>High</MenuItem>
+         
+          
         </Select>
       </FormControl>
     </div>

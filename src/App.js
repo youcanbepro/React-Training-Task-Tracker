@@ -1,13 +1,11 @@
 import { TaskForm } from "./components/taskForm/TaskForm";
 import { TaskList } from "./components/taskList/TaskList";
-import Fab from '@mui/material/Fab';
-import AddIcon from '@mui/icons-material/Add';
+
 import { TaskStore } from './components/utils/TaskStore';
-import { MuiNavBar, StyledFab } from "./components/utils/components/MuiNavBar";
-import { Box, Divider, Paper, Stack, styled, Typography } from "@mui/material";
+import { MuiNavBar,  } from "./components/utils/components/MuiNavBar";
+import { Box,  Stack, styled, Typography } from "@mui/material";
 import { msgAction } from "./components/BackendDeclarations";
 import { MuiDialog } from "./components/utils/components/MuiDialog";
-import { useState } from "react";
 
 /**
  * Simple task tracker app.
@@ -27,7 +25,7 @@ function App() {
   return (
     <>
 <MuiNavBar/>
-<Stack   spacing={1} direction={'row'}  >
+<Stack  spacing={1} direction={'row'}  >
         <TaskList title="Backlog" tasks={tasks} />
         <TaskList title="In Progress" tasks={wipTasks} />
         <TaskList  title="Completed" tasks={tasksHistory} />

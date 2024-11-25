@@ -1,5 +1,5 @@
-import { AppBar, Avatar, Chip, Fab, IconButton, Stack, styled, Toolbar, Tooltip, Typography } from '@mui/material'
-import { blue, green, pink, purple } from '@mui/material/colors';
+import { AppBar, Avatar,  Fab, IconButton, Stack, styled, Toolbar, Tooltip, Typography } from '@mui/material'
+import { blue } from '@mui/material/colors';
 import CatchingPokemonIcon from '@mui/icons-material/Dashboard'
 import AddIcon from '@mui/icons-material/Add';
 import React from 'react'
@@ -15,7 +15,7 @@ const StyledFab = styled(Fab)({
   margin: '0 auto',
 });
 export const MuiNavBar = () => {
-    const {createTask,sendMsg,allTasks} = TaskStore.useStore()
+    const {sendMsg,allTasks} = TaskStore.useStore()
   return (
     <AppBar position='fixed' sx={{ top: 'auto', bottom: 0 }} color='primary'>
         <Toolbar>
