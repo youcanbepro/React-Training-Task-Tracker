@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { MenuItem, Select, InputLabel, FormControl, Box } from "@mui/material";
 
 // List of color options

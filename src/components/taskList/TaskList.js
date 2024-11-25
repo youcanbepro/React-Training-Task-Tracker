@@ -1,5 +1,5 @@
 import React from 'react'
-import { Paper, Box, Typography, Chip, Badge,  } from '@mui/material';
+import {  Box,  Chip, Badge,  } from '@mui/material';
 import { TaskCard } from './taskListItem/TaskCard';
 
 
@@ -21,7 +21,7 @@ const getTitleColor =()=>{
               </Badge> 
           </Box>
           {tasks.map(task => (
-             <TaskCard  title={title} task={task}/>
+             <TaskCard key={task.id}  title={title} task={task}/>
           ))}
         </Box>
     </Box>

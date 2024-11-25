@@ -62,10 +62,7 @@ function createStore() {
    */
   const handleTaskClick = (taskId) => {
     // Iterate all tasks and find passed task by id
-    const updatedTask = wipTasks.find(task => {
-      if(task.id === taskId)
-       return  task
-    }
+    const updatedTask = wipTasks.find(task => task.id === taskId
     );
      const updatedTasks = wipTasks.filter(task => task.id !== taskId);
     setWipTasks(updatedTasks) 
