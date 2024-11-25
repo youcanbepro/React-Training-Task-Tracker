@@ -32,8 +32,19 @@ function createStore() {
    */
   const handleTaskDelete = (taskId) => {
     // Filter all tasks excpet task with passed id
-    const updatedTasks = tasks.filter(task => task.id !== taskId);
-    setTasks(updatedTasks);
+   if(tasks.find((task)=>task.id===taskId))
+   {
+       setTasks(tasks.filter(task => task.id !== taskId));
+  return
+   }
+ 
+    if(wipTasks.find((task)=>task.id===taskId))
+    {
+     setWipTasks( wipTasks.filter(task => task.id !== taskId));
+return
+    }
+      if(completedTasks.find((task)=>task.id===taskId))
+      {setcompletedTasks(completedTasks.filter(task => task.id !== taskId));}
       // saveTasks(updatedTasks)
   };
 
