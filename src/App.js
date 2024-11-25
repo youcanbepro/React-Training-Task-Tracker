@@ -22,7 +22,7 @@ const StyledBox = styled(Box)({
   margin: '0 auto',
 });
 function App() {
-    const {tasks,msg,tasksHistory,wipTasks } = TaskStore.useStore()
+    const {tasks,msg,tasksHistory,wipTasks,allTasks } = TaskStore.useStore()
 
   return (
     <>
@@ -39,7 +39,7 @@ function App() {
           </StyledBox>
    }
    <MuiDialog open={msg.msgAc===msgAction.delete}/>
-     {tasks.length==0&&wipTasks.length==0&&tasksHistory.length==0&& 
+     {allTasks()===0&& 
      <Box  sx={{display:"flex", alignItems:"center", justifyContent:"center"}}>
       <Typography variant='body1' color={'text.secondary'} >     No tasks found.</Typography>
   

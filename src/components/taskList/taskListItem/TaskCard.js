@@ -1,4 +1,4 @@
-import { Box, Card, CardContent, Typography, Button, Grid, Divider, Snackbar, CardActions, Tooltip, Paper, TextField  } from '@mui/material'
+import { Box, Card, CardContent, Typography, Button, Grid, Divider, Snackbar, CardActions, Tooltip, Paper, TextField, Chip  } from '@mui/material'
 import React, { useState } from 'react'
 import { TaskStore } from '../../utils/TaskStore';
 import { useLongPress } from '../../utils/useLongPress';
@@ -7,7 +7,7 @@ import Alert from '@mui/material/Alert';
 import Fab from '@mui/material/Fab';
 import DoneIcon from '@mui/icons-material/Done';
 import DeleteIcon from '@mui/icons-material/Delete';
-import SendIcon from '@mui/icons-material/Send';
+import PanToolAltSharpIcon from '@mui/icons-material/PanToolAltSharp';
 import "./taskCard.css"
 
 export const TaskCard = ({task, title}) => {
@@ -47,14 +47,19 @@ export const TaskCard = ({task, title}) => {
     <Typography  sx={{display:"flex",justifyContent:"center" , alignItems:"center", height:50}}  variant='body2' color={'text.secondary'}>{task.summary}</Typography>
     </CardContent>
     <CardActions sx={{display:"flex"}}>
-<Box sx={{display:"flex",flexDirection:"row-reverse",gap:"10px", justifyContent:"end" }}>
+<Box sx={{display:"flex",flexDirection:"row",gap:"10px",  }}>
   {title==="Backlog"&&<Tooltip   title="Move to WIP" arrow  placement='top' >
        <Fab size='small' color="primary" aria-label="move"  onClick={() => {
                   } }>
-            <SendIcon />
+            <PanToolAltSharpIcon  sx={{transform:"rotate(90deg)"}}/>
           </Fab>
     </Tooltip>}
-   
+   {title==="In Progress"&&<Tooltip   title="Move to Backlog" arrow  placement='top' >
+       <Fab size='small' color="primary" aria-label="move"  onClick={() => {
+                  } }>
+            <PanToolAltSharpIcon  sx={{transform:"rotate(-90deg) scaleX(-1)"}}/>
+          </Fab>
+    </Tooltip>}
 
    {title==="In Progress"&&<Tooltip title="Complete" arrow  placement='top' >
        <Fab size='small' color="primary" aria-label="complete"  onClick={() => {
@@ -63,8 +68,10 @@ export const TaskCard = ({task, title}) => {
             <DoneIcon />
           </Fab>
     </Tooltip>}
+       <Chip  color={"warning"} label={"High"} />
 </Box>
 </CardActions>
+
 </Card>
 
 {<Snackbar autoHideDuration={2000} open={snackVisibility} onClose={handleClose}>

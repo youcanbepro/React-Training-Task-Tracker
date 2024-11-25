@@ -8,11 +8,11 @@ const colors = [
   { name: "Blue", hex: "#ffe082" },
   { name: "Yellow", hex: "#ce93d8" },
   { name: "Indigo", hex: "#9fa8da" },
-   { name: "White", hex: "#ffffff" },
+  { name: "White", hex: "#ffffff" },
 ];
 
 const MuiColorSelect  = () => {
-  const [selectedColor, setSelectedColor] = useState("");
+  const [selectedColor, setSelectedColor] = useState("#ffffff");
 
   const handleChange = (event) => {
     setSelectedColor(event.target.value );
@@ -21,7 +21,7 @@ const MuiColorSelect  = () => {
   return (
     <Box sx={{ width: 200, margin: "0 auto", textAlign: "center" }}>
       <FormControl fullWidth>
-        <InputLabel  variant="standard" id="color-select-label">Color your Title Cover</InputLabel>
+        <InputLabel  variant="standard" id="color-select-label">Color your card</InputLabel>
        
         <Select
         variant="standard"

@@ -1,17 +1,15 @@
 
-import React, { useContext, useEffect, useState } from "react"
+import React, { useContext, useEffect, useRef, useState } from "react"
 import { msgAction } from "../BackendDeclarations"
 
 function createStore() {
   const Context = React.createContext()
 
   function Provider({ children }) {
-    const [tasks, setTasks] = useState([
-  ])
+    const [tasks, setTasks] = useState([])
     const [completedTasks, setcompletedTasks] = useState([])
     const [wipTasks, setWipTasks] = useState([])
     const [msg, setMsg]=useState({id:"",msg:msgAction.cancel})
-
     /**
    * Handles the click on the delete button and removes it from the tasks list.
    *
@@ -25,8 +23,6 @@ function createStore() {
   const tasksLocal = localStorage.getItem("tasks")
     if (tasksLocal)
     setTasks(JSON.parse(tasksLocal))
-
-  
     },[])
       
  /**
@@ -38,7 +34,7 @@ function createStore() {
     // Filter all tasks excpet task with passed id
     const updatedTasks = tasks.filter(task => task.id !== taskId);
     setTasks(updatedTasks);
-       saveTasks(updatedTasks)
+      // saveTasks(updatedTasks)
   };
 
    const handleTaskMove = (taskId) => {
@@ -62,7 +58,7 @@ function createStore() {
       return task;
     });
     setTasks(updatedTasks);
-    saveTasks(updatedTasks)
+   // saveTasks(updatedTasks)
   };
 
     /**
@@ -77,6 +73,7 @@ function createStore() {
 
     const contextObject = {
       tasks,
+      allTasks:()=> wipTasks.length+completedTasks.length+tasks.length,
       setTasks,
       handleTaskDelete,
       saveTasks,

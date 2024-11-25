@@ -6,6 +6,7 @@ import { TaskStore } from '../utils/TaskStore';
 import { msgAction } from '../BackendDeclarations';
 import { useState } from 'react';
 import MuiColorSelect from '../utils/components/MuiColorSelect';
+import PrioSelect from '../utils/components/PrioSelect';
 
 
 export const TaskForm = () => {
@@ -30,7 +31,9 @@ export const TaskForm = () => {
   <TextField required variant='outlined' label='Enter Title' onChange={(event)=>{setTitle(event.target.value)}}></TextField>
 <TextField multiline minRows={3} variant='outlined' label='Enter Description' onChange={(event)=>{setSummary(event.target.value)}}></TextField>
  </Stack>
-<MuiColorSelect/>
+<Stack gap={2} direction={"row"}><MuiColorSelect/>
+<PrioSelect/></Stack>
+
 
 
           </Stack>
