@@ -6,6 +6,7 @@ cancel: 2,
 delete:3,
 edit:4,
 success:5,
-create:6
+create:6,
+toDelete:7
 });
 

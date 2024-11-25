@@ -21,7 +21,7 @@ const getTitleColor =()=>{
               </Badge> 
           </Box>
           {tasks.map(task => (
-             <TaskCard id={task.id} title={title} task={task}/>
+             <TaskCard  title={title} task={task}/>
           ))}
         </Box>
     </Box>

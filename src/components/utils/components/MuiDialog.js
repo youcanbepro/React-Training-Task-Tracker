@@ -3,37 +3,28 @@ import { Button, Dialog,DialogTitle,DialogContent,DialogContentText,DialogAction
 import { TaskStore } from '../TaskStore'
 import { msgAction } from '../../BackendDeclarations'
 
-export const MuiDialog = ({open,onClose}) => {
-       const {msg,handleTaskDelete} = TaskStore.useStore()
+export const MuiDialog = ({open}) => {
+       const {msg,sendMsg,handleTaskDelete} = TaskStore.useStore()
   return (
      <Dialog 
      
      open ={open}
-     onClose={()=>{onClose(false)}}
+     onClose={()=>sendMsg({msgAc:msgAction.none})}
     aria-labelledby='dialog-title'
     aria-describedby='dialog-description'>
       <DialogTitle id="dialog-title">Delete Task ?</DialogTitle>
       <DialogContent>
-        <DialogContentText id="dialog-description">Are you sure you want to delete this Task?
-          You can choose to move to History
+        <DialogContentText id="dialog-description">Are you sure that you want to delete this Task?
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={()=>onClose(false)}>No</Button>
-        <Button variant='contained' onClick={()=>{onClose(false)
-          if(msg.msgAc===msgAction.delete)
-          {
+        <Button onClick={()=>sendMsg({msgAc:msgAction.none})}>No</Button>
+        <Button variant='contained' onClick={()=>{
+          sendMsg({msgAc:msgAction.none})
+          
             handleTaskDelete(msg.id)
-          }
 
         }}>Yes</Button>
-         <Button variant='contained' onClick={()=>{onClose(false)
-          if(msg.msgAc===msgAction.delete)
-          {
-            handleTaskDelete(msg.id)
-          }
-
-        }}>Move</Button>
       </DialogActions>
     </Dialog>
   )

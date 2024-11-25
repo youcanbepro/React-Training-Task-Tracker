@@ -2,9 +2,6 @@
 import React, { useContext, useEffect, useState } from "react"
 import { msgAction } from "../BackendDeclarations"
 
-
- 
-
 function createStore() {
   const Context = React.createContext()
 

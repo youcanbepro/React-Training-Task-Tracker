@@ -10,7 +10,7 @@ import DoneIcon from '@mui/icons-material/Done';
 import DeleteIcon from '@mui/icons-material/Delete';
 import SendIcon from '@mui/icons-material/Send';
 
-export const TaskCard = ({id,task, title}) => {
+export const TaskCard = ({task, title}) => {
       const {handleTaskClick,sendMsg,msg} = TaskStore.useStore()
   const [visible, setVisible]= useState(false)
    const [snackVisibility, setSnackVisibility]= useState(false)
@@ -28,7 +28,8 @@ export const TaskCard = ({id,task, title}) => {
 
 
   return (
-    <Box id={id} width={"300px"} padding={"10px"}>
+    <Box key={task.id} width={"300px"} padding={"10px"} {...useLongPress(() =>  
+                   sendMsg({id:task.id,msgAc:msgAction.toDelete}), { ms: 1500 })}>
 
     <Card>
     <CardContent>
@@ -41,18 +42,13 @@ export const TaskCard = ({id,task, title}) => {
 <Box sx={{display:"flex",flexDirection:"row-reverse",gap:"10px", justifyContent:"end" }}>
   {title==="Backlog"&&<Tooltip   title="Move to WIP" arrow  placement='top' >
        <Fab size='small' color="primary" aria-label="move"  onClick={() => {
-                    setVisible(true)
-                    sendMsg({id:task.id,msgAc:msgAction.delete})
-
                   } }>
             <SendIcon />
           </Fab>
     </Tooltip>}
-    {<Tooltip   title="Delete Task" arrow  placement='top' >
+    { msg.msgAc===msgAction.toDelete&&<Tooltip   title="Delete Task" arrow  placement='top' >
        <Fab size='small' color="primary" aria-label="delete"  onClick={() => {
-                    setVisible(true)
                     sendMsg({id:task.id,msgAc:msgAction.delete})
-
                   } }>
             <DeleteIcon />
           </Fab>
@@ -60,9 +56,7 @@ export const TaskCard = ({id,task, title}) => {
 
    {title==="In Progress"&&<Tooltip title="Complete" arrow  placement='top' >
        <Fab size='small' color="primary" aria-label="complete"  onClick={() => {
-                    setVisible(true)
-                    sendMsg({id:task.id,msgAc:msgAction.delete})
-
+                  
                   } }>
             <DoneIcon />
           </Fab>

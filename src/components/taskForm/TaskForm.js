@@ -1,7 +1,7 @@
 
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import { Button, Paper, Stack, TextField, Typography } from '@mui/material';
+import { Button, Dialog, Paper, Stack, TextField, Typography } from '@mui/material';
 import { TaskStore } from '../utils/TaskStore';
 import { msgAction } from '../BackendDeclarations';
 import { useState } from 'react';
@@ -12,11 +12,14 @@ export const TaskForm = () => {
   const [title,setTitle]=useState("")
   const [summary,setSummary]=useState("")
 
-    const {handleCreateTask,sendMsg} = TaskStore.useStore()
+    const {handleCreateTask,sendMsg,msg} = TaskStore.useStore()
   return (
-    <>
-        <Box sx={{ alignItems:"center"}} mx={5} my={5}>
-      <Paper elevation={12} mx={5}>
+    
+     <Dialog
+     open={msg.msgAc===msgAction.create}
+     onClose={()=>{sendMsg({msgAc:msgAction.none})}}
+    aria-labelledby='dialog-title'
+    aria-describedby='dialog-description'>
         <Box mx={5}>
           <Box pt={3} pb={5}>
             <Typography variant='h6'>Add Task</Typography>
@@ -37,9 +40,8 @@ sendMsg({msgAc:msgAction.none})
         
         </Box>
         
-      </Paper>
-    </Box>
-    </>
+
+    </Dialog>
   )
 }
 

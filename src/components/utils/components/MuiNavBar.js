@@ -6,7 +6,7 @@ import React from 'react'
 import { TaskStore } from '../TaskStore';
 import { msgAction } from '../../BackendDeclarations';
 
-export const StyledFab = styled(Fab)({
+const StyledFab = styled(Fab)({
   position: 'absolute',
   zIndex: 1,
   top: -30,
