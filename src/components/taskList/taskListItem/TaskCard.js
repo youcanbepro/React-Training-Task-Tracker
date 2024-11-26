@@ -57,13 +57,13 @@ export const TaskCard = ({ task, title }) => {
         </Tooltip>
       )}
       <Box
-        className={task.id === msg.id && msg.msgAc === msgAction.toDelete && "jiggle"}
+        className={task.id === msg.id && msg.msgAc === msgAction.toDelete ? "jiggle" : ""}
         key={task.id}
         width={"300px"}
         padding={"10px"}
         {...useLongPress(() => sendMsg({ id: task.id, msgAc: msgAction.toDelete }), { ms: 1500 })}
       >
-        <Card className={task.completed && "disabled"}>
+        <Card className={task.completed ? "disabled" : ""}>
           <CardContent>
             <Paper
               elevation={1}
@@ -167,7 +167,7 @@ export const TaskCard = ({ task, title }) => {
           </CardContent>
           <CardActions sx={{ display: "flex", justifyContent: "end" }}>
             <Stack spacing={2} direction={"row"}>
-              <Stack direction={"row-reverse"} spacing={6}>
+              <Stack direction={"row-reverse"} spacing={16}>
                 {title === "Backlog" && (
                   <Tooltip title="Move to WIP" arrow placement="top">
                     <Fab
