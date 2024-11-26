@@ -129,43 +129,45 @@ export const TaskCard = ({ task, title }) => {
                       variant="body2"
                       color={"text.secondary"}
                     >
-                      4 Jan
+                      {task.createdOn}
                     </Typography>
                   </Box>
                 </Stack>
               </Box>
-              <Box>
-                <Stack>
-                  <Box>
-                    <Typography
-                      sx={{
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        height: 20
-                      }}
-                      variant="body2"
-                      color={"text.secondary"}
-                    >
-                      Completed:
-                    </Typography>
-                  </Box>
-                  <Box>
-                    <Typography
-                      sx={{
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        height: 20
-                      }}
-                      variant="body2"
-                      color={"text.secondary"}
-                    >
-                      12 Jan
-                    </Typography>
-                  </Box>
-                </Stack>
-              </Box>
+              {task.completedOn && (
+                <Box>
+                  <Stack>
+                    <Box>
+                      <Typography
+                        sx={{
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          height: 20
+                        }}
+                        variant="body2"
+                        color={"text.secondary"}
+                      >
+                        Completed:
+                      </Typography>
+                    </Box>
+                    <Box>
+                      <Typography
+                        sx={{
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          height: 20
+                        }}
+                        variant="body2"
+                        color={"text.secondary"}
+                      >
+                        {task.completedOn}
+                      </Typography>
+                    </Box>
+                  </Stack>
+                </Box>
+              )}
             </Stack>
           </CardContent>
           <CardActions sx={{ display: "flex", justifyContent: "end" }}>

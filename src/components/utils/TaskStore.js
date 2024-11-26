@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react"
 import { msgAction } from "../BackendDeclarations"
+import moment from "moment"
 
 function createStore() {
   const Context = React.createContext()
@@ -9,6 +10,8 @@ function createStore() {
     const [completedTasks, setcompletedTasks] = useState([])
     const [wipTasks, setWipTasks] = useState([])
     const [msg, setMsg] = useState({ id: "", msg: msgAction.cancel })
+    const today = new Date()
+
     /**
      * Handles the click on the delete button and removes it from the tasks list.
      *
@@ -73,7 +76,10 @@ function createStore() {
       const updatedTask = wipTasks.find((task) => task.id === taskId)
       const updatedTasks = wipTasks.filter((task) => task.id !== taskId)
       setWipTasks(updatedTasks)
-      setcompletedTasks([...completedTasks, { ...updatedTask, completed: true }])
+      setcompletedTasks([
+        ...completedTasks,
+        { ...updatedTask, completed: true, completedOn: moment(today).locale("de-DE").format("ll").slice(0, -6) }
+      ])
       // saveTasks(updatedTasks)
     }
 
@@ -86,7 +92,13 @@ function createStore() {
       // generate a unique id
       setTasks([
         ...tasks,
-        { id: "r" + Math.random() + (+tasks.length + 1), ...{ text, summary, prio, color }, completed: false }
+        {
+          id: "r" + Math.random() + (+tasks.length + 1),
+          ...{ text, summary, prio, color },
+          completed: false,
+          createdOn: moment(today).locale("de-DE").format("ll").slice(0, -6),
+          completedOn: null
+        }
       ])
     }
 
