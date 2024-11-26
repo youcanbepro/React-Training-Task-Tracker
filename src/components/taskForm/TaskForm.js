@@ -12,6 +12,7 @@ export const TaskForm = () => {
   const [summary, setSummary] = useState("")
   const [prio, setPrio] = useState(0)
   const [color, setColor] = useState("#ffffff")
+  const [validation, setValidation] = useState(false)
 
   const { handleCreateTask, sendMsg, msg } = TaskStore.useStore()
   return (
@@ -36,6 +37,7 @@ export const TaskForm = () => {
               onChange={(event) => {
                 setTitle(event.target.value)
               }}
+              error={validation}
             ></TextField>
             <TextField
               multiline
@@ -57,6 +59,10 @@ export const TaskForm = () => {
           <Button
             variant="contained"
             onClick={() => {
+              if (!title.length > 0) {
+                setValidation(true)
+                return
+              }
               handleCreateTask({ text: title, summary: summary, prio: prio, color: color })
               sendMsg({ msgAc: msgAction.none })
             }}
