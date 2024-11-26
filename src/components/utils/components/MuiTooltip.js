@@ -1,7 +1,5 @@
-import React from 'react'
+import React from "react"
 
 export const MuiTooltip = () => {
-  return (
-    <div>MuiTooltip</div>
-  )
+  return <div>MuiTooltip</div>
 }

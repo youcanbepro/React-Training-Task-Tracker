@@ -1,30 +1,32 @@
-import React from 'react'
-import { Button, Dialog,DialogTitle,DialogContent,DialogContentText,DialogActions } from '@mui/material'
-import { TaskStore } from '../TaskStore'
-import { msgAction } from '../../BackendDeclarations'
+import React from "react"
+import { Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from "@mui/material"
+import { TaskStore } from "../TaskStore"
+import { msgAction } from "../../BackendDeclarations"
 
-export const MuiDialog = ({open}) => {
-       const {msg,sendMsg,handleTaskDelete} = TaskStore.useStore()
+export const MuiDialog = ({ open }) => {
+  const { msg, sendMsg, handleTaskDelete } = TaskStore.useStore()
   return (
-     <Dialog 
-     
-     open ={open}
-     onClose={()=>sendMsg({msgAc:msgAction.none})}
-    aria-labelledby='dialog-title'
-    aria-describedby='dialog-description'>
+    <Dialog
+      open={open}
+      onClose={() => sendMsg({ msgAc: msgAction.none })}
+      aria-labelledby="dialog-title"
+      aria-describedby="dialog-description"
+    >
       <DialogTitle id="dialog-title">Delete Task ?</DialogTitle>
       <DialogContent>
-        <DialogContentText id="dialog-description">Are you sure that you want to delete this Task?
-        </DialogContentText>
+        <DialogContentText id="dialog-description">Are you sure that you want to delete this Task?</DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={()=>sendMsg({msgAc:msgAction.none})}>No</Button>
-        <Button variant='contained' onClick={()=>{
-          sendMsg({msgAc:msgAction.none})
-          
+        <Button onClick={() => sendMsg({ msgAc: msgAction.none })}>No</Button>
+        <Button
+          variant="contained"
+          onClick={() => {
+            sendMsg({ msgAc: msgAction.none })
             handleTaskDelete(msg.id)
-
-        }}>Yes</Button>
+          }}
+        >
+          Yes
+        </Button>
       </DialogActions>
     </Dialog>
   )

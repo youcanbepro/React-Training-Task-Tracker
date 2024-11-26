@@ -1,4 +1,3 @@
-
 /**
  * Capitalises the first letter of a String
  * @param name string
@@ -7,7 +6,6 @@
 export const capitalizeFirstLetter = (name) => {
   return name.charAt(0).toUpperCase() + name.slice(1)
 }
-
 
 // Helper
 const stringIsNumber = (value) => isNaN(Number(value)) === false
@@ -21,5 +19,3 @@ export const enumToArray = (enumType) => {
     .filter(stringIsNumber)
     .map((key) => enumType[key])
 }
-
-

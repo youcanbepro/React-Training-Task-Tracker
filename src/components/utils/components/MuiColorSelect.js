@@ -1,5 +1,5 @@
-import React from "react";
-import { MenuItem, Select, InputLabel, FormControl, Box } from "@mui/material";
+import React from "react"
+import { MenuItem, Select, InputLabel, FormControl, Box } from "@mui/material"
 
 // List of color options
 const colors = [
@@ -8,27 +8,22 @@ const colors = [
   { name: "Blue", hex: "#ffe082" },
   { name: "Yellow", hex: "#ce93d8" },
   { name: "Indigo", hex: "#9fa8da" },
-  { name: "White", hex: "#ffffff" },
-];
+  { name: "White", hex: "#ffffff" }
+]
 
-const MuiColorSelect  = ({selectedColor, setSelectedColor}) => {
- 
-
+const MuiColorSelect = ({ selectedColor, setSelectedColor }) => {
   const handleChange = (event) => {
-    setSelectedColor(event.target.value );
-  };
+    setSelectedColor(event.target.value)
+  }
 
   return (
     <Box sx={{ width: 200, margin: "0 auto", textAlign: "center" }}>
       <FormControl fullWidth>
-        <InputLabel  variant="standard" id="color-select-label">Color your card</InputLabel>
-       
-        <Select
-        variant="standard"
-          labelId="color-select-label"
-          value={selectedColor}
-          onChange={handleChange}
-        >
+        <InputLabel variant="standard" id="color-select-label">
+          Color your card
+        </InputLabel>
+
+        <Select variant="standard" labelId="color-select-label" value={selectedColor} onChange={handleChange}>
           {colors.map((color) => (
             <MenuItem key={color.name} value={color.hex}>
               <Box
@@ -36,7 +31,7 @@ const MuiColorSelect  = ({selectedColor, setSelectedColor}) => {
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  gap: 1,
+                  gap: 1
                 }}
               >
                 <Box
@@ -44,7 +39,7 @@ const MuiColorSelect  = ({selectedColor, setSelectedColor}) => {
                     width: 160,
                     height: 16,
                     backgroundColor: color.hex,
-                    border: "1px solid #ccc",
+                    border: "1px solid #ccc"
                   }}
                 />
               </Box>
@@ -53,7 +48,7 @@ const MuiColorSelect  = ({selectedColor, setSelectedColor}) => {
         </Select>
       </FormControl>
     </Box>
-  );
-};
+  )
+}
 
-export default MuiColorSelect;
+export default MuiColorSelect

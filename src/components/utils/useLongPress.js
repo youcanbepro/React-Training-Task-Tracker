@@ -1,10 +1,7 @@
-import {  useCallback, useEffect, useRef } from "react"
-
-
+import { useCallback, useEffect, useRef } from "react"
 
 const defaultOptions = {
   ms: 300
- 
 }
 
 const pointerMoveThreshold = 5

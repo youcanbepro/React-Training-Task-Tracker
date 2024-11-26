@@ -1,16 +1,15 @@
 .jiggle {
-animation: jiggle 0.2s infinite;
+  animation: jiggle 0.2s infinite;
   transform: rotate(-1deg);
 }
 
-
 @keyframes jiggle {
-    0% {
-        transform: rotate(-1deg);
-        }
-    50% {
-        transform: rotate(1deg);
-    }
+  0% {
+    transform: rotate(-1deg);
+  }
+  50% {
+    transform: rotate(1deg);
+  }
 }
 
 .disabled::before {
