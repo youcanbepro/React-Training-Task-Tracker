@@ -13,6 +13,7 @@ import "./taskCard.css"
 export const TaskCard = ({ task, title }) => {
   const { handleTaskClick, sendMsg, msg, handleTaskMove, handleTaskMoveBack } = TaskStore.useStore()
   const [snackVisibility, setSnackVisibility] = useState(false)
+  const [longPress, setLongPress] = useState(false)
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -56,178 +57,183 @@ export const TaskCard = ({ task, title }) => {
           </Fab>
         </Tooltip>
       )}
-      <Box
-        className={task.id === msg.id && msg.msgAc === msgAction.toDelete ? "jiggle" : ""}
-        key={task.id}
-        width={"300px"}
-        padding={"10px"}
-        {...useLongPress(() => sendMsg({ id: task.id, msgAc: msgAction.toDelete }), { ms: 1500 })}
+      <div
+        onPointerDown={() => {
+          if (msg.msgAc === msgAction.toDelete) sendMsg({ msgAc: msgAction.none })
+        }}
       >
-        <Card elevation={task.completed ? 0 : 1} className={task.completed ? "disabled" : ""}>
-          <CardContent>
-            <Paper
-              elevation={1}
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                bgcolor: getBgColor(),
-                height: 80
-              }}
-            >
-              <Typography
-                style={{ textDecoration: task.completed ? "line-through" : "none" }}
-                gutterBottom
-                variant="h6"
-                component={"div"}
+        <Box
+          className={task.id === msg.id && msg.msgAc === msgAction.toDelete ? "jiggle" : ""}
+          key={task.id}
+          padding={"10px"}
+          {...useLongPress(() => sendMsg({ id: task.id, msgAc: msgAction.toDelete }), { ms: 1500 })}
+        >
+          <Card elevation={task.completed ? 0 : 1} className={task.completed ? "disabled" : ""}>
+            <CardContent>
+              <Paper
+                elevation={1}
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  bgcolor: getBgColor(),
+                  height: 80
+                }}
               >
-                {task.text}
+                <Typography
+                  style={{ textDecoration: task.completed ? "line-through" : "none" }}
+                  gutterBottom
+                  variant="h6"
+                  component={"div"}
+                >
+                  {task.text}
+                </Typography>
+              </Paper>
+              <Typography
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  height: 50,
+                  textDecoration: task.completed ? "line-through" : "none"
+                }}
+                variant="body2"
+                color={"text.secondary"}
+              >
+                {task.summary}
               </Typography>
-            </Paper>
-            <Typography
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                height: 50,
-                textDecoration: task.completed ? "line-through" : "none"
-              }}
-              variant="body2"
-              color={"text.secondary"}
-            >
-              {task.summary}
-            </Typography>
 
-            <Stack spacing={18} direction={"row"}>
-              <Box>
-                <Stack>
-                  <Box>
-                    <Typography
-                      sx={{
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        height: 20
-                      }}
-                      variant="body2"
-                      color={"text.secondary"}
-                    >
-                      Created:
-                    </Typography>
-                  </Box>
-                  <Box>
-                    <Typography
-                      sx={{
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        height: 20
-                      }}
-                      variant="body2"
-                      color={"text.secondary"}
-                    >
-                      4 Jan
-                    </Typography>
-                  </Box>
-                </Stack>
-              </Box>
-              <Box>
-                <Stack>
-                  <Box>
-                    <Typography
-                      sx={{
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        height: 20
-                      }}
-                      variant="body2"
-                      color={"text.secondary"}
-                    >
-                      Completed:
-                    </Typography>
-                  </Box>
-                  <Box>
-                    <Typography
-                      sx={{
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        height: 20
-                      }}
-                      variant="body2"
-                      color={"text.secondary"}
-                    >
-                      12 Jan
-                    </Typography>
-                  </Box>
-                </Stack>
-              </Box>
-            </Stack>
-          </CardContent>
-          <CardActions sx={{ display: "flex", justifyContent: "end" }}>
-            <Stack spacing={2} direction={"row"}>
-              <Stack direction={"row-reverse"} spacing={16}>
-                {title === "Backlog" && (
-                  <Tooltip title="Move to WIP" arrow placement="top">
-                    <Fab
-                      size="small"
-                      variant="extended"
-                      color="primary"
-                      aria-label="moveTo"
-                      onClick={() => {
-                        handleTaskMove(task.id)
-                      }}
-                    >
-                      <MoveDownOutlinedIcon sx={{ transform: "rotate(-90deg) scaleX(-1)" }} />
-                    </Fab>
-                  </Tooltip>
-                )}
-                {title === "In Progress" && (
-                  <Tooltip title="Complete" arrow placement="top">
-                    <Fab
-                      variant="extended"
-                      size="small"
-                      color="primary"
-                      aria-label="complete"
-                      onClick={() => {
-                        handleTaskClick(task.id)
-                        setSnackVisibility(true)
-                      }}
-                    >
-                      <DoneIcon />
-                    </Fab>
-                  </Tooltip>
-                )}
-                {title === "In Progress" && (
-                  <Tooltip title="Move to Backlog" arrow placement="top">
-                    <Fab
-                      size="small"
-                      variant="extended"
-                      color="primary"
-                      aria-label="move"
-                      onClick={() => {
-                        handleTaskMoveBack(task.id)
-                      }}
-                    >
-                      <MoveDownOutlinedIcon sx={{ transform: "rotate(90deg)" }} />
-                    </Fab>
-                  </Tooltip>
-                )}
+              <Stack spacing={18} direction={"row"}>
+                <Box>
+                  <Stack>
+                    <Box>
+                      <Typography
+                        sx={{
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          height: 20
+                        }}
+                        variant="body2"
+                        color={"text.secondary"}
+                      >
+                        Created:
+                      </Typography>
+                    </Box>
+                    <Box>
+                      <Typography
+                        sx={{
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          height: 20
+                        }}
+                        variant="body2"
+                        color={"text.secondary"}
+                      >
+                        4 Jan
+                      </Typography>
+                    </Box>
+                  </Stack>
+                </Box>
+                <Box>
+                  <Stack>
+                    <Box>
+                      <Typography
+                        sx={{
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          height: 20
+                        }}
+                        variant="body2"
+                        color={"text.secondary"}
+                      >
+                        Completed:
+                      </Typography>
+                    </Box>
+                    <Box>
+                      <Typography
+                        sx={{
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          height: 20
+                        }}
+                        variant="body2"
+                        color={"text.secondary"}
+                      >
+                        12 Jan
+                      </Typography>
+                    </Box>
+                  </Stack>
+                </Box>
               </Stack>
-              <Chip color={getChipColor()} label={getChipLabel()} />
-            </Stack>
-          </CardActions>
-        </Card>
+            </CardContent>
+            <CardActions sx={{ display: "flex", justifyContent: "end" }}>
+              <Stack spacing={2} direction={"row"}>
+                <Stack direction={"row-reverse"} spacing={16}>
+                  {title === "Backlog" && (
+                    <Tooltip title="Move to WIP" arrow placement="top">
+                      <Fab
+                        size="small"
+                        variant="extended"
+                        color="primary"
+                        aria-label="moveTo"
+                        onClick={() => {
+                          handleTaskMove(task.id)
+                        }}
+                      >
+                        <MoveDownOutlinedIcon sx={{ transform: "rotate(-90deg) scaleX(-1)" }} />
+                      </Fab>
+                    </Tooltip>
+                  )}
+                  {title === "In Progress" && (
+                    <Tooltip title="Complete" arrow placement="top">
+                      <Fab
+                        variant="extended"
+                        size="small"
+                        color="primary"
+                        aria-label="complete"
+                        onClick={() => {
+                          handleTaskClick(task.id)
+                          setSnackVisibility(true)
+                        }}
+                      >
+                        <DoneIcon />
+                      </Fab>
+                    </Tooltip>
+                  )}
+                  {title === "In Progress" && (
+                    <Tooltip title="Move to Backlog" arrow placement="top">
+                      <Fab
+                        size="small"
+                        variant="extended"
+                        color="primary"
+                        aria-label="move"
+                        onClick={() => {
+                          handleTaskMoveBack(task.id)
+                        }}
+                      >
+                        <MoveDownOutlinedIcon sx={{ transform: "rotate(90deg)" }} />
+                      </Fab>
+                    </Tooltip>
+                  )}
+                </Stack>
+                <Chip color={getChipColor()} label={getChipLabel()} />
+              </Stack>
+            </CardActions>
+          </Card>
 
-        {
-          <Snackbar autoHideDuration={2000} open={snackVisibility} onClose={handleClose}>
-            <Alert onClose={handleClose} severity="success" variant="filled" sx={{ width: "100%" }}>
-              Congratulations on completing the task !!!
-            </Alert>
-          </Snackbar>
-        }
-      </Box>
+          {
+            <Snackbar autoHideDuration={2000} open={snackVisibility} onClose={handleClose}>
+              <Alert onClose={handleClose} severity="success" variant="filled" sx={{ width: "100%" }}>
+                Congratulations on completing the task !!!
+              </Alert>
+            </Snackbar>
+          }
+        </Box>
+      </div>
     </Box>
   )
 }
