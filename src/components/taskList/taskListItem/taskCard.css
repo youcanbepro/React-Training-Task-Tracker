@@ -18,6 +18,6 @@
   content: "";
   position: absolute;
   border-radius: 4px;
-  background-color: rgba(0, 0, 0, 0.08);
+  background-color: rgba(0, 0, 0, 0.04);
   /* Blur */
 }

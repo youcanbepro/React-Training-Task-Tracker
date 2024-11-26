@@ -63,7 +63,7 @@ export const TaskCard = ({ task, title }) => {
         padding={"10px"}
         {...useLongPress(() => sendMsg({ id: task.id, msgAc: msgAction.toDelete }), { ms: 1500 })}
       >
-        <Card className={task.completed ? "disabled" : ""}>
+        <Card elevation={task.completed ? 0 : 1} className={task.completed ? "disabled" : ""}>
           <CardContent>
             <Paper
               elevation={1}
