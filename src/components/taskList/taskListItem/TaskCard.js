@@ -93,8 +93,7 @@ export const TaskCard = ({ task, title }) => {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                height: 50,
-                textDecoration: task.completed ? "line-through" : "none"
+                height: 50
               }}
               variant="body2"
               color={"text.secondary"}

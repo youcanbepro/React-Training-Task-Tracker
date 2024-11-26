@@ -18,11 +18,11 @@
   content: "";
   position: absolute;
   border-radius: 4px;
-  /* background-image: url("../../../assets/strike.png");
+  background-image: url("../../../assets/strike.png");
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: center; */
-  background-color: white;
+  background-position: center;
+  /* background-color: white; */
   opacity: 0.5;
   /* Blur */
 }
