@@ -3,7 +3,7 @@ import { TaskList } from "./components/taskList/TaskList"
 
 import { TaskStore } from "./components/utils/TaskStore"
 import { MuiNavBar } from "./components/utils/components/MuiNavBar"
-import { Box, Stack, styled, Typography } from "@mui/material"
+import { Box, Container, Stack, styled, Typography } from "@mui/material"
 import { msgAction } from "./components/BackendDeclarations"
 import { MuiDialog } from "./components/utils/components/MuiDialog"
 
@@ -23,9 +23,9 @@ function App() {
   const { tasks, msg, tasksHistory, wipTasks, allTasks } = TaskStore.useStore()
 
   return (
-    <div>
+    <Container>
       <MuiNavBar />
-      <Box sx={{ paddingBottom: 3 }}>
+      <Box pb={4}>
         <Stack spacing={1} direction={"row"}>
           <TaskList title="Backlog" tasks={tasks} />
           <TaskList title="In Progress" tasks={wipTasks} />
@@ -46,7 +46,7 @@ function App() {
           </Box>
         )}
       </Box>
-    </div>
+    </Container>
   )
 }
 
