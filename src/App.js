@@ -23,28 +23,30 @@ function App() {
   const { tasks, msg, tasksHistory, wipTasks, allTasks } = TaskStore.useStore()
 
   return (
-    <>
+    <div>
       <MuiNavBar />
-      <Stack spacing={1} direction={"row"}>
-        <TaskList title="Backlog" tasks={tasks} />
-        <TaskList title="In Progress" tasks={wipTasks} />
-        <TaskList title="Completed" tasks={tasksHistory} />
-      </Stack>
-      {msg.msgAc === msgAction.create && (
-        <StyledBox>
-          <TaskForm></TaskForm>
-        </StyledBox>
-      )}
-      <MuiDialog open={msg.msgAc === msgAction.delete} />
-      {allTasks() === 0 && (
-        <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-          <Typography variant="body1" color={"text.secondary"}>
-            {" "}
-            No tasks found.
-          </Typography>
-        </Box>
-      )}
-    </>
+      <Box sx={{ paddingBottom: 3 }}>
+        <Stack spacing={1} direction={"row"}>
+          <TaskList title="Backlog" tasks={tasks} />
+          <TaskList title="In Progress" tasks={wipTasks} />
+          <TaskList title="Completed" tasks={tasksHistory} />
+        </Stack>
+        {msg.msgAc === msgAction.create && (
+          <StyledBox>
+            <TaskForm></TaskForm>
+          </StyledBox>
+        )}
+        <MuiDialog open={msg.msgAc === msgAction.delete} />
+        {allTasks() === 0 && (
+          <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <Typography variant="body1" color={"text.secondary"}>
+              {" "}
+              No tasks found.
+            </Typography>
+          </Box>
+        )}
+      </Box>
+    </div>
   )
 }
 
