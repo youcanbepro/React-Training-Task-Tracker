@@ -65,6 +65,7 @@ export const TaskCard = ({ task, title }) => {
         <Box
           className={task.id === msg.id && msg.msgAc === msgAction.toDelete ? "jiggle" : ""}
           key={task.id}
+          width={"300px"}
           padding={"10px"}
           {...useLongPress(() => sendMsg({ id: task.id, msgAc: msgAction.toDelete }), { ms: 1500 })}
         >
