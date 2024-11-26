@@ -14,7 +14,7 @@
 
 .disabled::before {
   width: 300px;
-  height: 211px;
+  height: 252px;
   content: "";
   position: absolute;
   border-radius: 4px;
