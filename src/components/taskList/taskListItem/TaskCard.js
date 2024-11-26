@@ -52,7 +52,7 @@ const getBgColor = ()=>{
 }
 
   return (
-    <Box sx={{position:"relative"}}>
+    <Box  sx={{position:"relative"}}>
     { task.id===msg.id&&msg.msgAc===msgAction.toDelete&&<Tooltip   title="Delete Task" arrow  placement='top' >
        <Fab sx={{position:"absolute"}} size='small' color="primary" aria-label="delete"  onClick={() => {
                     sendMsg({id:task.id,msgAc:msgAction.delete})
@@ -64,7 +64,7 @@ const getBgColor = ()=>{
                    sendMsg({id:task.id,msgAc:msgAction.toDelete}), { ms: 1500 })}>
                     
 
-    <Card>
+    <Card   className={task.completed&&"disabled"}>
     <CardContent >
         <Paper   elevation={1} sx={{display:"flex",justifyContent:"center" , alignItems:"center",bgcolor:getBgColor() , height:80}}>
         <Typography  style={{ textDecoration: task.completed ? 'line-through' : 'none' }} gutterBottom variant='h6' component={'div'}>{task.text}</Typography>
