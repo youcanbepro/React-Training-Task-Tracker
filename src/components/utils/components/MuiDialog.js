@@ -3,11 +3,11 @@ import { Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogAc
 import { TaskStore } from "../TaskStore"
 import { msgAction } from "../../BackendDeclarations"
 
-export const MuiDialog = ({ open }) => {
+export const MuiDialog = () => {
   const { msg, sendMsg, handleTaskDelete } = TaskStore.useStore()
   return (
     <Dialog
-      open={open}
+      open={msg.msgAc === msgAction.delete}
       onClose={() => sendMsg({ msgAc: msgAction.none })}
       aria-labelledby="dialog-title"
       aria-describedby="dialog-description"

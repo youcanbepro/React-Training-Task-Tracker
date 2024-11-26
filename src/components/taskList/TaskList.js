@@ -7,6 +7,7 @@ export const TaskList = ({ title, tasks }) => {
     if (title.toString() === "Backlog") return "warning"
     else if (title.toString() === "In Progress") return "primary"
   }
+
   return (
     <Box elevation={2}>
       <Box mx={4} my={4}>
@@ -23,3 +24,4 @@ export const TaskList = ({ title, tasks }) => {
     </Box>
   )
 }
+export const MemoTaskList = React.memo(TaskList)

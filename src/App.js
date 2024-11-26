@@ -1,5 +1,5 @@
 import { TaskForm } from "./components/taskForm/TaskForm"
-import { TaskList } from "./components/taskList/TaskList"
+import { MemoTaskList } from "./components/taskList/TaskList"
 
 import { TaskStore } from "./components/utils/TaskStore"
 import { MuiNavBar } from "./components/utils/components/MuiNavBar"
@@ -28,16 +28,16 @@ function App() {
         <MuiNavBar />
         <Box sx={{ display: "flex", alignItems: "center", flexDirection: "column" }} pb={4}>
           <Stack spacing={1} direction={"row"}>
-            <TaskList title="Backlog" tasks={tasks} />
-            <TaskList title="In Progress" tasks={wipTasks} />
-            <TaskList title="Completed" tasks={tasksHistory} />
+            <MemoTaskList title="Backlog" tasks={tasks} />
+            <MemoTaskList title="In Progress" tasks={wipTasks} />
+            <MemoTaskList title="Completed" tasks={tasksHistory} />
           </Stack>
           {msg.msgAc === msgAction.create && (
             <StyledBox>
               <TaskForm></TaskForm>
             </StyledBox>
           )}
-          <MuiDialog open={msg.msgAc === msgAction.delete} />
+          <MuiDialog />
           {allTasks() === 0 && (
             <Box sx={{ display: "flex", justifyContent: "center" }}>
               <Typography variant="body1" color={"text.secondary"}>

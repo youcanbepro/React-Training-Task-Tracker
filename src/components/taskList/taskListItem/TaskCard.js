@@ -13,7 +13,6 @@ import "./taskCard.css"
 export const TaskCard = ({ task, title }) => {
   const { handleTaskClick, sendMsg, msg, handleTaskMove, handleTaskMoveBack } = TaskStore.useStore()
   const [snackVisibility, setSnackVisibility] = useState(false)
-  const [longPress, setLongPress] = useState(false)
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
