@@ -8,7 +8,7 @@ export const TaskList = ({ title, tasks }) => {
     else if (title.toString() === "In Progress") return "primary"
   }
   return (
-    <Box sx={{ flexGrow: ".33" }} elevation={2}>
+    <Box elevation={2}>
       <Box mx={4} my={4}>
         <Box mx={4}>
           <Box pt={2} pb={4} sx={{ display: "flex", justifyContent: "center" }}>

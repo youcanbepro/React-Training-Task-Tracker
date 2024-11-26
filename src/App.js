@@ -24,9 +24,9 @@ function App() {
 
   return (
     <>
-      <Container minWidth="sm">
+      <Container maxWidth="sm">
         <MuiNavBar />
-        <Box pb={4}>
+        <Box sx={{ display: "flex", alignItems: "center", flexDirection: "column" }} pb={4}>
           <Stack spacing={1} direction={"row"}>
             <TaskList title="Backlog" tasks={tasks} />
             <TaskList title="In Progress" tasks={wipTasks} />
@@ -39,7 +39,7 @@ function App() {
           )}
           <MuiDialog open={msg.msgAc === msgAction.delete} />
           {allTasks() === 0 && (
-            <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <Box sx={{ display: "flex", justifyContent: "center" }}>
               <Typography variant="body1" color={"text.secondary"}>
                 {" "}
                 No tasks found.
