@@ -106,6 +106,7 @@ export const TaskCard = ({ task, title }) => {
                 alignItems: "center",
                 height: 50
               }}
+              gutterBottom
               variant="body2"
               color={"text.secondary"}
             >

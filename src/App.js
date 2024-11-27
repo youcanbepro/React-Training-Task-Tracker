@@ -3,7 +3,7 @@ import { MemoTaskList } from "./components/taskList/TaskList"
 
 import { TaskStore } from "./components/utils/TaskStore"
 import { MuiNavBar } from "./components/utils/components/MuiNavBar"
-import { Box, Container, CssBaseline, Stack, styled, Typography } from "@mui/material"
+import { Box, Container, Stack, styled, Typography } from "@mui/material"
 import { msgAction } from "./components/BackendDeclarations"
 import { MuiDialog } from "./components/utils/components/MuiDialog"
 

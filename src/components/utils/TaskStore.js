@@ -2,29 +2,44 @@ import React, { useContext, useEffect, useState } from "react"
 import { msgAction } from "../BackendDeclarations"
 import moment from "moment"
 
+/**
+ * This is a hook using Context API that stores the state of the APP
+ * This can be shared by components with the Provider
+ * @param  none
+ * @returns  React Context object
+ */
+
 function createStore() {
   const Context = React.createContext()
 
   function Provider({ children }) {
+    // hooks for Tasks in different state
     const [tasks, setTasks] = useState([])
+
     const [completedTasks, setcompletedTasks] = useState([])
+
     const [wipTasks, setWipTasks] = useState([])
+
+    // hook for handling actions in the app
     const [msg, setMsg] = useState({ id: "", msg: msgAction.cancel })
-    const today = new Date()
+
+    const today = new Date() //gets date today
+
+    //TODO: local storage to have the same state after reload
 
     /**
      * Handles the click on the delete button and removes it from the tasks list.
      *
      * @param {Array} updatedTasks
      */
-    const saveTasks = (updatedTasks) => {
-      localStorage.setItem("tasks", JSON.stringify(updatedTasks))
-    }
+    // const saveTasks = (updatedTasks) => {
+    //   localStorage.setItem("tasks", JSON.stringify(updatedTasks))
+    // }
 
-    useEffect(() => {
-      const tasksLocal = localStorage.getItem("tasks")
-      if (tasksLocal) setTasks(JSON.parse(tasksLocal))
-    }, [])
+    // useEffect(() => {
+    //   const tasksLocal = localStorage.getItem("tasks")
+    //   if (tasksLocal) setTasks(JSON.parse(tasksLocal))
+    // }, [])
 
     /**
      * Handles the click on the delete button and removes it from the tasks list.
@@ -48,6 +63,12 @@ function createStore() {
       // saveTasks(updatedTasks)
     }
 
+    /**
+     * Handles the click to move the task from Backlog to WIP.
+     *
+     * @param {number} taskId
+     */
+
     const handleTaskMove = (taskId) => {
       // Filter all tasks excpet task with passed id
       const taskFound = tasks.find((task) => task.id === taskId)
@@ -57,6 +78,12 @@ function createStore() {
 
       // saveTasks(updatedTasks)
     }
+
+    /**
+     * Handles the click to move the task from WIP to Backlog.
+     *
+     * @param {number} taskId
+     */
     const handleTaskMoveBack = (taskId) => {
       // Filter all tasks excpet task with passed id
       const taskFound = wipTasks.find((task) => task.id === taskId)
@@ -66,9 +93,10 @@ function createStore() {
 
       // saveTasks(updatedTasks)
     }
+
     /**
-     * Handels the click on a task and toggles the complete property of the task object.
-     *
+     * Handels the click on a task and toggles the complete property of the task object and moves the Tasks from
+     * WIP to Completed
      * @param {number} taskId
      */
     const handleTaskClick = (taskId) => {
@@ -86,10 +114,10 @@ function createStore() {
     /**
      * Creates a new task
      *
-     * @param {text,summary} task
+     * @param {text,summary,prio,color,task}
      */
     const handleCreateTask = ({ text, summary, prio, color }) => {
-      // generate a unique id
+      // generate a unique id and set the Task Object
       setTasks([
         ...tasks,
         {
@@ -101,13 +129,13 @@ function createStore() {
         }
       ])
     }
+    // Context Object exposed . Can be consumed with a Wrapping Provider
 
     const contextObject = {
       tasks,
       allTasks: () => wipTasks.length + completedTasks.length + tasks.length,
       setTasks,
       handleTaskDelete,
-      saveTasks,
       handleTaskClick,
       sendMsg: setMsg,
       msg,

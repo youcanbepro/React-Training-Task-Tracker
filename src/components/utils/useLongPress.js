@@ -6,6 +6,12 @@ const defaultOptions = {
 
 const pointerMoveThreshold = 5
 
+/**
+ * This is a hook to detech long press on devices
+ * @param {function}
+ * @returns  click events
+ */
+
 export const useLongPress = function (callback, options = defaultOptions) {
   const data = useRef({
     timerHandle: 0,
