@@ -1,4 +1,16 @@
-import { Box, Card, CardContent, Typography, Snackbar, CardActions, Tooltip, Paper, Chip, Stack } from "@mui/material"
+import {
+  Box,
+  Card,
+  CardContent,
+  Typography,
+  Snackbar,
+  CardActions,
+  Tooltip,
+  Paper,
+  Chip,
+  Stack,
+  Divider
+} from "@mui/material"
 import React, { useState } from "react"
 import { TaskStore } from "../../utils/TaskStore"
 import { useLongPress } from "../../utils/useLongPress"
@@ -169,9 +181,11 @@ export const TaskCard = ({ task, title }) => {
               )}
             </Stack>
           </CardContent>
+          <Divider />
+
           <CardActions sx={{ display: "flex", justifyContent: "end" }}>
             <Stack spacing={2} direction={"row"}>
-              <Stack direction={"row-reverse"} spacing={16}>
+              <Stack direction={"row-reverse"} spacing={15}>
                 {title === "Backlog" && (
                   <Tooltip title="Move to WIP" arrow placement="top">
                     <Fab
