@@ -5,6 +5,7 @@ import AddIcon from "@mui/icons-material/Add"
 import React from "react"
 import { TaskStore } from "../TaskStore"
 import { msgAction } from "../../BackendDeclarations"
+import Rahul from "../../../assets/rahul.jpg"
 
 const StyledFab = styled(Fab)({
   position: "absolute",
@@ -31,7 +32,7 @@ export const MuiNavBar = () => {
               <AddIcon />
             </StyledFab>
           </Tooltip>
-          <Avatar sx={{ bgcolor: blue[500] }}>RR</Avatar>
+          <Avatar alt="Rahul Ranjan" src={Rahul} />
         </Stack>
       </Toolbar>
     </AppBar>

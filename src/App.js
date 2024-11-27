@@ -6,6 +6,9 @@ import { MuiNavBar } from "./components/utils/components/MuiNavBar"
 import { Box, Container, Stack, styled, Typography } from "@mui/material"
 import { msgAction } from "./components/BackendDeclarations"
 import { MuiDialog } from "./components/utils/components/MuiDialog"
+import Confetti from "react-confetti"
+import { useWindowSize } from "react-use"
+import Tutorial from "./components/utils/components/Tutorial"
 
 /**
  * Simple task tracker app.
@@ -21,11 +24,12 @@ const StyledBox = styled(Box)({
 })
 function App() {
   const { tasks, msg, tasksHistory, wipTasks, allTasks } = TaskStore.useStore()
-
+  const { width, height } = useWindowSize()
   return (
     <>
       <Container maxWidth="sm">
         <MuiNavBar />
+        <Tutorial />
         <Box sx={{ display: "flex", alignItems: "center", flexDirection: "column" }} pb={4}>
           <Stack spacing={1} direction={"row"}>
             <MemoTaskList title="Backlog" tasks={tasks} />
@@ -47,6 +51,13 @@ function App() {
             </Box>
           )}
         </Box>
+        <Confetti
+          width={width}
+          height={height}
+          numberOfPieces={500} // Adjust the amount of confetti
+          recycle={false} // Ensure it stops after rendering
+          gravity={0.2} // Slower falling effect
+        />
       </Container>
     </>
   )
