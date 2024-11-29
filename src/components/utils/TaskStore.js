@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react"
+import React, { useContext, useState } from "react"
 import { msgAction } from "../BackendDeclarations"
 import moment from "moment"
 
@@ -25,22 +25,6 @@ function createStore() {
 
     const today = new Date() //gets date today
 
-    //TODO: local storage to have the same state after reload
-
-    /**
-     * Handles the click on the delete button and removes it from the tasks list.
-     *
-     * @param {Array} updatedTasks
-     */
-    // const saveTasks = (updatedTasks) => {
-    //   localStorage.setItem("tasks", JSON.stringify(updatedTasks))
-    // }
-
-    // useEffect(() => {
-    //   const tasksLocal = localStorage.getItem("tasks")
-    //   if (tasksLocal) setTasks(JSON.parse(tasksLocal))
-    // }, [])
-
     /**
      * Handles the click on the delete button and removes it from the tasks list.
      *
@@ -60,7 +44,6 @@ function createStore() {
       if (completedTasks.find((task) => task.id === taskId)) {
         setcompletedTasks(completedTasks.filter((task) => task.id !== taskId))
       }
-      // saveTasks(updatedTasks)
     }
 
     /**
@@ -75,8 +58,6 @@ function createStore() {
       const updatedTasks = tasks.filter((task) => task.id !== taskId)
       setTasks(updatedTasks)
       setWipTasks([...wipTasks, taskFound])
-
-      // saveTasks(updatedTasks)
     }
 
     /**
@@ -90,8 +71,6 @@ function createStore() {
       const updatedTasks = wipTasks.filter((task) => task.id !== taskId)
       setWipTasks(updatedTasks)
       setTasks([...tasks, taskFound])
-
-      // saveTasks(updatedTasks)
     }
 
     /**
@@ -108,7 +87,6 @@ function createStore() {
         ...completedTasks,
         { ...updatedTask, completed: true, completedOn: moment(today).locale("de-DE").format("ll").slice(0, -6) }
       ])
-      // saveTasks(updatedTasks)
     }
 
     /**

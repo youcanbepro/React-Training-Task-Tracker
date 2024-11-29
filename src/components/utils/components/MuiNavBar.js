@@ -1,12 +1,10 @@
 import { AppBar, Avatar, Fab, IconButton, Stack, styled, Toolbar, Tooltip, Typography } from "@mui/material"
-import { blue } from "@mui/material/colors"
 import CatchingPokemonIcon from "@mui/icons-material/Dashboard"
 import AddIcon from "@mui/icons-material/Add"
 import React from "react"
 import { TaskStore } from "../TaskStore"
 import { msgAction } from "../../BackendDeclarations"
 import Rahul from "../../../assets/rahul.jpg"
-import HelpCenterSharpIcon from "@mui/icons-material/HelpCenterSharp"
 
 const StyledFab = styled(Fab)({
   position: "absolute",

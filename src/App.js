@@ -8,7 +8,6 @@ import { msgAction } from "./components/BackendDeclarations"
 import { MuiDialog } from "./components/utils/components/MuiDialog"
 import Confetti from "react-confetti"
 import { useWindowSize } from "react-use"
-import Tutorial from "./components/utils/components/Tutorial"
 
 /**
  * Simple task tracker app.

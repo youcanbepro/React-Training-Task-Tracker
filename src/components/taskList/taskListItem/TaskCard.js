@@ -1,21 +1,8 @@
-import {
-  Box,
-  Card,
-  CardContent,
-  Typography,
-  Snackbar,
-  CardActions,
-  Tooltip,
-  Paper,
-  Chip,
-  Stack,
-  Divider
-} from "@mui/material"
-import React, { useState } from "react"
+import { Box, Card, CardContent, Typography, CardActions, Tooltip, Paper, Chip, Stack, Divider } from "@mui/material"
+import React from "react"
 import { TaskStore } from "../../utils/TaskStore"
 import { useLongPress } from "../../utils/useLongPress"
 import { msgAction } from "../../BackendDeclarations"
-import Alert from "@mui/material/Alert"
 import Fab from "@mui/material/Fab"
 import DoneIcon from "@mui/icons-material/Done"
 import DeleteIcon from "@mui/icons-material/Delete"
