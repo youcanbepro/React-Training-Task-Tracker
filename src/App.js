@@ -3,7 +3,7 @@ import { MemoTaskList } from "./components/taskList/TaskList"
 
 import { TaskStore } from "./components/utils/TaskStore"
 import { MuiNavBar } from "./components/utils/components/MuiNavBar"
-import { Box, Container, Stack, styled, Typography } from "@mui/material"
+import { Alert, Box, Container, Snackbar, Stack, styled, Typography } from "@mui/material"
 import { msgAction } from "./components/BackendDeclarations"
 import { MuiDialog } from "./components/utils/components/MuiDialog"
 import Confetti from "react-confetti"
@@ -23,13 +23,20 @@ const StyledBox = styled(Box)({
   margin: "0 auto"
 })
 function App() {
-  const { tasks, msg, tasksHistory, wipTasks, allTasks } = TaskStore.useStore()
+  const { tasks, msg, tasksHistory, wipTasks, allTasks, sendMsg } = TaskStore.useStore()
   const { width, height } = useWindowSize()
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return
+    }
+    sendMsg({ msgAc: msgAction.none })
+  }
   return (
     <>
       <Container maxWidth="sm">
         <MuiNavBar />
-        <Tutorial />
+        {/* <Tutorial /> */}
         <Box sx={{ display: "flex", alignItems: "center", flexDirection: "column" }} pb={4}>
           <Stack spacing={1} direction={"row"}>
             <MemoTaskList title="Backlog" tasks={tasks} />
@@ -58,6 +65,12 @@ function App() {
           recycle={false} // Ensure it stops after rendering
           gravity={0.2} // Slower falling effect
         />
+
+        <Snackbar autoHideDuration={2000} open={msg.msgAc === msgAction.completed} onClose={handleClose}>
+          <Alert onClose={handleClose} severity="success" variant="filled" sx={{ width: "100%" }}>
+            Congratulations on completing the task !!!
+          </Alert>
+        </Snackbar>
       </Container>
     </>
   )

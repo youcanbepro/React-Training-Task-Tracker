@@ -24,14 +24,6 @@ import "./taskCard.css"
 
 export const TaskCard = ({ task, title }) => {
   const { handleTaskClick, sendMsg, msg, handleTaskMove, handleTaskMoveBack } = TaskStore.useStore()
-  const [snackVisibility, setSnackVisibility] = useState(false)
-
-  const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return
-    }
-    setSnackVisibility(false)
-  }
 
   const getChipLabel = () => {
     if (task.prio === 0) return "None"
@@ -211,7 +203,7 @@ export const TaskCard = ({ task, title }) => {
                       aria-label="complete"
                       onClick={() => {
                         handleTaskClick(task.id)
-                        setSnackVisibility(true)
+                        sendMsg({ msgAc: msgAction.completed })
                       }}
                     >
                       <DoneIcon />
@@ -238,14 +230,6 @@ export const TaskCard = ({ task, title }) => {
             </Stack>
           </CardActions>
         </Card>
-
-        {
-          <Snackbar autoHideDuration={2000} open={snackVisibility} onClose={handleClose}>
-            <Alert onClose={handleClose} severity="success" variant="filled" sx={{ width: "100%" }}>
-              Congratulations on completing the task !!!
-            </Alert>
-          </Snackbar>
-        }
       </Box>
     </Box>
   )

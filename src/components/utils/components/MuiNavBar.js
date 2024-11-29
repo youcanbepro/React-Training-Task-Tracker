@@ -6,6 +6,7 @@ import React from "react"
 import { TaskStore } from "../TaskStore"
 import { msgAction } from "../../BackendDeclarations"
 import Rahul from "../../../assets/rahul.jpg"
+import HelpCenterSharpIcon from "@mui/icons-material/HelpCenterSharp"
 
 const StyledFab = styled(Fab)({
   position: "absolute",
@@ -32,6 +33,7 @@ export const MuiNavBar = () => {
               <AddIcon />
             </StyledFab>
           </Tooltip>
+
           <Avatar alt="Rahul Ranjan" src={Rahul} />
         </Stack>
       </Toolbar>

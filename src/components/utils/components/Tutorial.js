@@ -22,7 +22,7 @@ const Tutorial = () => {
       {showTutorial && (
         <div style={styles.overlay}>
           <div style={styles.modal}>
-            <h1>Welcome to the Tutorial</h1>
+            <h1>Welcome to the FAQs</h1>
             <p>Here’s how to use the app:</p>
             <ul>
               <li>Step 1: Do this</li>
@@ -46,7 +46,7 @@ const styles = {
     left: 0,
     width: "100%",
     height: "100%",
-    backgroundColor: "rgba(0, 0, 0, 0.8)",
+    backgroundColor: "rgba(0, 0, 0, 0.3)",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",

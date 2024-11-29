@@ -4,7 +4,7 @@ export const msgAction = Object.freeze({
   cancel: 2,
   delete: 3,
   edit: 4,
-  success: 5,
+  completed: 5,
   create: 6,
   toDelete: 7
 })
